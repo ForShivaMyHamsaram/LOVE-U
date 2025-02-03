@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="istockphoto-1439973042-612x612.jpg">
+    <style>
+        /* Body */
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f7f3f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('snow-white-background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #4b2f2a;
+        }
+        
+        /* Login Container */
+        #login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        
+        h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+        
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #9a4a35;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #4b2f2a;
+            background-color: #fff;
+        }
+
+        input:focus {
+            border-color: #feae68;
+            outline: none;
+        }
+        
+        /* Button */
+        button {
+            background: linear-gradient(145deg, #feae68, #9a4a35);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        button:hover {
+            background: linear-gradient(145deg, #9a4a35, #feae68);
+        }
+
+        /* Error Message */
+        #error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        /* Sparkle Animation */
+        .sparkle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: #ff69b4;
+            animation: sparkleAnimation 1s infinite;
+        }
+
+        @keyframes sparkleAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+        
+        /* Heart animation */
+        .heart {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: red;
+            opacity: 1;
+            animation: heartAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50px) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(2);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
+        <div id="login-div">
+            <input type="text" id="username" placeholder="Username">
+            <p id="username-error" style="color: red; display: none;">Username is incorrect</p>
+            <button onclick="checkUsername()">Next</button>
+        </div>
+        <div id="password-div" style="display: none;">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+        <p id="error-message"></p>
+        <div class="sparkle">✨</div>
+    </div>
+
+
+    
+
+    <script>
+        function checkUsername() {
+            const username = document.getElementById('username').value;
+            const usernameError = document.getElementById('username-error');
+            const loginDiv = document.getElementById('login-div');
+            const passwordDiv = document.getElementById('password-div');
+            if (username === 'Shiva') {
+                usernameError.style.display = 'none';
+                loginDiv.style.display = 'none'; // Hide login field
+                passwordDiv.style.display = 'block'; // Show password field
+            } else {
+                usernameError.style.display = 'block';
+                passwordDiv.style.display = 'none'; // Hide password field
+            }
+        }
+
+        function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    console.log('Login button clicked!');
+    console.log('Username:', username);
+    console.log('Password:', password);
+
+    if (username === 'Shiva' && password === '1376') {
+        console.log('Login successful!');
+        localStorage.setItem("loggedIn", "true");
+        console.log(localStorage.getItem("loggedIn"));  // Should log "true" after login
+        
+        // Added logging to confirm the redirect happens
+        console.log('Redirecting to index.html...');
+        window.location.href = "slider.html";  // Redirect to index.html
+    } else {
+        errorMessage.textContent = 'Invalid username or password';
+        errorMessage.style.color = 'red';
+    }
+}
+
+
+    </script>
+</body>
+</html>

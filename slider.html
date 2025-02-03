@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="istockphoto-1439973042-612x612.jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        #slider-container {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .slide {
+            width: 33.33%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+        }
+
+        .slider .slide.played {
+            filter: none;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: red;
+            animation: heartAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50px) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(2);
+            }
+        }
+
+        .progress-container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background-color: #28a745;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        .time {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider-container">
+        <button class="play-btn" onclick="playMusic()">PLAY</button>
+        <button class="slider-btn prev" onclick="prevSlide()">&#10094;</button>
+        <div class="slider">
+            <div class="slide" style="background-image: url('28ADEF33-39DC-4F1B-8EBA-20D9982E3D9D_1_105_c.jpeg');"></div>
+            <div class="slide" style="background-image: url('48AA08B8-61D7-4EC0-BEC0-1BD9B243E127_1_105_c.jpeg');"></div>
+            <div class="slide" style="background-image: url('994C70A5-AE9A-497E-88D4-8041C626E865_1_105_c.jpeg');"></div>
+        </div>
+        <button class="slider-btn next" onclick="nextSlide()">&#10095;</button>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="time">
+                <span id="current-time">0:00</span> / <span id="total-time">2:34</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let audio;
+        let progressBar;
+        let currentTimeDisplay;
+        let totalTimeDisplay;
+        let sliderInterval;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            progressBar = document.querySelector('.progress .progress');
+            currentTimeDisplay = document.getElementById('current-time');
+            totalTimeDisplay = document.getElementById('total-time');
+
+            showSlider();
+        });
+
+        function showSlider() {
+            document.getElementById('slider-container').style.display = 'block';
+            startAutoplay();
+        }
+
+        function nextSlide() {
+            const slider = document.querySelector('.slider');
+            currentIndex = (currentIndex + 1) % 3;
+            slider.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+        }
+
+        function prevSlide() {
+            const slider = document.querySelector('.slider');
+            currentIndex = (currentIndex - 1 + 3) % 3;
+            slider.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+        }
+
+        function playMusic() {
+            audio = new Audio('love-story-230928.mp3');
+            audio.play();
+
+            totalTimeDisplay.textContent = formatTime(audio.duration);
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.add('played'));
+
+            createHearts();
+            setInterval(updateProgress, 1000);
+        }
+
+        function startAutoplay() {
+            sliderInterval = setInterval(nextSlide, 30000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(sliderInterval);
+        }
+
+        function createHearts() {
+            const playBtn = document.querySelector('.play-btn');
+            const playBtnRect = playBtn.getBoundingClientRect();
+
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+
+                heart.style.left = `${playBtnRect.left + playBtnRect.width / 2 - 12}px`;
+                heart.style.bottom = `${playBtnRect.top + 20}px`;
+
+                playBtn.parentElement.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        function updateProgress() {
+            if (audio && progressBar) {
+                const currentTime = audio.currentTime;
+                const duration = audio.duration;
+                const progress = (currentTime / duration) * 100;
+
+                progressBar.style.width = progress + '%';
+                currentTimeDisplay.textContent = formatTime(currentTime);
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+    </script>
+</body>
+</html>
