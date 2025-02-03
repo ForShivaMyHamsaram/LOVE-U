@@ -3,110 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="istockphoto-1439973042-612x612.jpg">
+    <title>Video and Login Transition</title>
     <style>
-        /* Body */
-        body {
-            font-family: 'Times New Roman', serif;
-            background-color: #f7f3f1;
+        /* Full-screen video */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Wrapper for login container */
+        #login-wrapper {
+            height: 100vh; /* Full viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-image: url('snow-white-background.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #4b2f2a;
         }
-        
+
         /* Login Container */
         #login-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 300px;
+            width: 350px;
+            display: none;
+            max-width: 90%;
+            /* height: 70vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
         }
-        
+
         h2 {
             font-family: 'Georgia', serif;
             font-size: 24px;
             color: #9a4a35;
             margin-bottom: 20px;
         }
-        
-        /* Input Fields */
-        input {
+
+        input, button {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
             border: 2px solid #9a4a35;
             border-radius: 10px;
             font-size: 16px;
-            color: #4b2f2a;
-            background-color: #fff;
         }
 
-        input:focus {
-            border-color: #feae68;
-            outline: none;
-        }
-        
-        /* Button */
         button {
-            background: linear-gradient(145deg, #feae68, #9a4a35);
+            background-color: #feae68;
             color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
             cursor: pointer;
-            font-size: 18px;
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        button:hover {
-            background: linear-gradient(145deg, #9a4a35, #feae68);
         }
 
-        /* Error Message */
         #error-message {
             color: red;
             font-size: 14px;
             margin-top: 15px;
         }
 
-        /* Sparkle Animation */
-        .sparkle {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 20px;
-            color: #ff69b4;
-            animation: sparkleAnimation 1s infinite;
+        .form-appear {
+            animation: fadeIn 1s ease-out forwards;
         }
 
-        @keyframes sparkleAnimation {
-            0% {
-                opacity: 0;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1);
-            }
+        #login-wrapper {
+            background-image: url('snow-white-background.jpg');
+            background-size: cover;
+            background-position: center;
+         
         }
-        
-        /* Heart animation */
+
+        @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+        /* Fullscreen wrapper for second page content */
+        #content-wrapper {
+            height: 100%;
+            width: 100%;
+            background-color: #f0f0f0; /* You can set a background color or image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #slider-container {
+            width: 80%;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* padding: 20px; */
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-div-content {
+            width: 90%;
+        }
+        .login-div-button {
+            width: 99%;
+        }
+
+        .login-div-button:hover {
+            scale: 1.01;
+            opacity: 0.9;
+        }
+        .login-div-button-password {
+            width: 110%;
+        }
+        .login-div-button-password:hover {
+               scale: 1.01;
+            opacity: 0.9;
+        }
+
+
+
+
+
+        #slider-container {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .slide {
+            width: 33.33%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+        }
+
+        .slider .slide.played {
+            filter: none;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
         .heart {
             position: absolute;
             bottom: 60px;
@@ -114,7 +221,6 @@
             transform: translateX(-50%);
             font-size: 24px;
             color: red;
-            opacity: 1;
             animation: heartAnimation 1s ease-in-out forwards;
         }
 
@@ -132,29 +238,106 @@
                 transform: translateY(-100px) scale(2);
             }
         }
+
+        .progress-container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background-color: #28a745;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        .time {
+            margin-top: 10px;
+        }
+
         
     </style>
 </head>
 <body>
-    <div id="login-container">
-        <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
-        <div id="login-div">
-            <input type="text" id="username" placeholder="Username">
-            <p id="username-error" style="color: red; display: none;">Username is incorrect</p>
-            <button onclick="checkUsername()">Next</button>
+    <!-- Video Element -->
+    <video id="video" autoplay controls>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Wrapper for login form -->
+    <div id="login-wrapper">
+        <!-- Login Form -->
+        <div id="login-container">
+            <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
+            <div id="login-div"> 
+                <input class="login-div-content" type="text" id="username" placeholder="Username">
+                <p class="login-div-content" id="username-error" style="color: red; display: none;">Username is incorrect</p>
+                <button class="login-div-button" onclick="checkUsername()">Next</button>
+            </div>
+            <div class="login-div-content" id="password-div" style="display: none;">
+                <input type="password" id="password" placeholder="Password">
+                <button class="login-div-button-password" onclick="login()">Login</button>
+            </div>
+            <p id="error-message"></p>
         </div>
-        <div id="password-div" style="display: none;">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">Login</button>
-        </div>
-        <p id="error-message"></p>
-        <div class="sparkle">✨</div>
     </div>
 
 
+
+    <!-- Wrapper for second page content (Initially Hidden) -->
+<!-- Wrapper for second page content (Initially Hidden) -->
+<div id="content-wrapper" style="display: none;">
+
+        <h2>Welcome, Princess!</h2>
+        <div id="slider-container">
+            <button class="play-btn" onclick="playMusic()">PLAY</button>
+            <button class="slider-btn prev" onclick="prevSlide()">&#10094;</button>
+            <div class="slider">
+                <div class="slide" style="background-image: url('28ADEF33-39DC-4F1B-8EBA-20D9982E3D9D_1_105_c.jpeg');"></div>
+                <div class="slide" style="background-image: url('48AA08B8-61D7-4EC0-BEC0-1BD9B243E127_1_105_c.jpeg');"></div>
+                <div class="slide" style="background-image: url('994C70A5-AE9A-497E-88D4-8041C626E865_1_105_c.jpeg');"></div>
+            </div>
+            <button class="slider-btn next" onclick="nextSlide()">&#10095;</button>
+    
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="time">
+                    <span id="current-time">0:00</span> / <span id="total-time">2:34</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     
 
+
     <script>
+        const video = document.getElementById("video");
+        const loginContainer = document.getElementById("login-container");
+
+        // When the video ends, show the login form
+        video.onended = function() {
+            // Show the login form with a smooth transition
+            loginContainer.style.display = "block";
+            loginContainer.classList.add("form-appear");
+            // Scroll the page down to the login form
+            loginContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
         function checkUsername() {
             const username = document.getElementById('username').value;
             const usernameError = document.getElementById('username-error');
@@ -162,11 +345,11 @@
             const passwordDiv = document.getElementById('password-div');
             if (username === 'Shiva') {
                 usernameError.style.display = 'none';
-                loginDiv.style.display = 'none'; // Hide login field
-                passwordDiv.style.display = 'block'; // Show password field
+                loginDiv.style.display = 'none';
+                passwordDiv.style.display = 'block';
             } else {
                 usernameError.style.display = 'block';
-                passwordDiv.style.display = 'none'; // Hide password field
+                passwordDiv.style.display = 'none';
             }
         }
 
@@ -174,24 +357,111 @@
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('error-message');
-
-    console.log('Login button clicked!');
-    console.log('Username:', username);
-    console.log('Password:', password);
+    const loginWrapper = document.getElementById('login-wrapper');
+    const contentWrapper = document.getElementById('content-wrapper');
 
     if (username === 'Shiva' && password === '1376') {
-        console.log('Login successful!');
         localStorage.setItem("loggedIn", "true");
-        console.log(localStorage.getItem("loggedIn"));  // Should log "true" after login
-        
-        // Added logging to confirm the redirect happens
-        console.log('Redirecting to index.html...');
-        window.location.href = "slider.html";  // Redirect to index.html
+
+        // Hide the login form
+        loginWrapper.style.display = "none";
+
+        // Show the content div with fade-in animation
+        contentWrapper.style.display = "flex"; // Display the div (set to flex for alignment)
+        contentWrapper.classList.add("show");  // Add the transition animation class
     } else {
         errorMessage.textContent = 'Invalid username or password';
         errorMessage.style.color = 'red';
     }
 }
+
+
+let currentIndex = 0;
+        let audio;
+        let progressBar;
+        let currentTimeDisplay;
+        let totalTimeDisplay;
+        let sliderInterval;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            progressBar = document.querySelector('.progress .progress');
+            currentTimeDisplay = document.getElementById('current-time');
+            totalTimeDisplay = document.getElementById('total-time');
+
+            showSlider();
+        });
+
+        function showSlider() {
+            document.getElementById('slider-container').style.display = 'block';
+            startAutoplay();
+        }
+
+        function nextSlide() {
+            const slider = document.querySelector('.slider');
+            currentIndex = (currentIndex + 1) % 3;
+            slider.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+        }
+
+        function prevSlide() {
+            const slider = document.querySelector('.slider');
+            currentIndex = (currentIndex - 1 + 3) % 3;
+            slider.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+        }
+
+        function playMusic() {
+            audio = new Audio('love-story-230928.mp3');
+            audio.play();
+
+            totalTimeDisplay.textContent = formatTime(audio.duration);
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.add('played'));
+
+            createHearts();
+            setInterval(updateProgress, 1000);
+        }
+
+        function startAutoplay() {
+            sliderInterval = setInterval(nextSlide, 15000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(sliderInterval);
+        }
+
+        function createHearts() {
+            const playBtn = document.querySelector('.play-btn');
+            const playBtnRect = playBtn.getBoundingClientRect();
+
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+
+                heart.style.left = `${playBtnRect.left + playBtnRect.width / 2 - 12}px`;
+                heart.style.bottom = `${playBtnRect.top + 20}px`;
+
+                playBtn.parentElement.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        function updateProgress() {
+            if (audio && progressBar) {
+                const currentTime = audio.currentTime;
+                const duration = audio.duration;
+                const progress = (currentTime / duration) * 100;
+
+                progressBar.style.width = progress + '%';
+                currentTimeDisplay.textContent = formatTime(currentTime);
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
 
 
     </script>
