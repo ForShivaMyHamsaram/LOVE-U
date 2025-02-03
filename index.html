@@ -53,6 +53,13 @@
             margin-bottom: 20px;
         }
 
+        h3 {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+
         input, button {
             width: 100%;
             padding: 12px;
@@ -281,12 +288,15 @@
         <!-- Login Form -->
         <div id="login-container">
             <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
+            <h3 id="name-question">What is your name?</h3>
             <div id="login-div"> 
                 <input class="login-div-content" type="text" id="username" placeholder="Username">
                 <p class="login-div-content" id="username-error" style="color: red; display: none;">Username is incorrect</p>
-                <button class="login-div-button" onclick="checkUsername()">Next</button>
+                <button class="login-div-button" onclick="checkUsername(), yearQuestion()">Next</button>
             </div>
+            
             <div class="login-div-content" id="password-div" style="display: none;">
+                <h3 id="year-question" style="display: none;" >Princess was born in Iran. Enter your Iranian year of birth</h3>
                 <input type="password" id="password" placeholder="Password">
                 <button class="login-div-button-password" onclick="login()">Login</button>
             </div>
@@ -354,12 +364,24 @@
             }
         }
 
+function yearQuestion() {
+    const username = document.getElementById('username').value;
+    const yearQuestion = document.getElementById('year-question');
+    const nameQuestion = document.getElementById('name-question'); 
+if (username === 'Shiva') {
+    yearQuestion.style.display = 'flex';
+    nameQuestion.style.display = 'none';
+}}
+        
         function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('error-message');
     const loginWrapper = document.getElementById('login-wrapper');
     const contentWrapper = document.getElementById('content-wrapper');
+    const yearQuestion = document.getElementById('year-question');
+
+   
 
     if (username === 'Shiva' && password === '1376') {
         localStorage.setItem("loggedIn", "true");
@@ -367,6 +389,8 @@
         // Hide the login form
         loginWrapper.style.display = "none";
 
+
+      
         // Show the content div with fade-in animation
         contentWrapper.style.display = "flex"; // Display the div (set to flex for alignment)
         contentWrapper.classList.add("show");  // Add the transition animation class
