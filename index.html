@@ -393,6 +393,17 @@
                 document.querySelector(".play-btn").textContent = "PLAY";
             }
         }
+
+
+          const video = document.getElementById('video');
+  
+  video.addEventListener('play', function() {
+    console.log('Video is playing');
+  });
+
+  video.addEventListener('error', function(e) {
+    console.error('Error playing video:', e);
+  });
     </script>
 </body>
 </html>
