@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video and Login Transition</title>
+    <link rel="shortcut icon" href="istockphoto-1439973042-612x612.jpg" type="image/x-icon">
+    <style>
+        /* Full-screen video */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Wrapper for login container */
+        #login-wrapper {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Login Container */
+        #login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+            display: none;
+            max-width: 90%;
+            /* height: 70vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #9a4a35;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #feae68;
+            color: white;
+            cursor: pointer;
+        }
+
+        #error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .form-appear {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        #login-wrapper {
+            background-image: url('snow-white-background.jpg');
+            background-size: cover;
+            background-position: center;
+         
+        }
+
+        
+
+        @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+        /* Fullscreen wrapper for second page content */
+        #content-wrapper {
+            height: 100%;
+            width: 100%;
+            background-color: #f0f0f0; /* You can set a background color or image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #slider-container {
+            width: 80%;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* padding: 20px; */
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-div-content {
+            width: 90%;
+        }
+        .login-div-button {
+            width: 99%;
+        }
+
+        .login-div-button:hover {
+            scale: 1.01;
+            opacity: 0.9;
+        }
+        .login-div-button-password {
+            width: 110%;
+        }
+        .login-div-button-password:hover {
+               scale: 1.01;
+            opacity: 0.9;
+        }
+
+
+
+
+
+        #slider-container {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .slide {
+            width: 33.33%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+         
+        }
+
+        .slider .slide.played {
+            filter: none;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: red;
+            animation: heartAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50px) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(2);
+            }
+        }
+
+        .progress-container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background-color: #28a745;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        .time {
+            margin-top: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Video Element -->
+    <video id="video" autoplay controls>
+        <source src="video1.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Wrapper for login form -->
+    <div id="login-wrapper">
+        <!-- Login Form -->
+        <div id="login-container">
+            <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
+            <h3 id="name-question">What is your name?</h3>
+            <div id="login-div"> 
+                <input class="login-div-content" type="text" id="username" placeholder="Username">
+                <p class="login-div-content" id="username-error" style="color: red; display: none;">Username is incorrect</p>
+                <button class="login-div-button" onclick="checkUsername(), yearQuestion()">Next</button>
+            </div>
+            
+            <div class="login-div-content" id="password-div" style="display: none;">
+                <h3 id="year-question" style="display: none;" >Princess was born in Iran. Enter your Iranian year of birth</h3>
+                <input type="password" id="password" placeholder="Password">
+                <button class="login-div-button-password" onclick="login()">Login</button>
+            </div>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+
+
+
+
+  
+
+    
+
+
+    <script>
+        const video = document.getElementById("video");
+        const loginContainer = document.getElementById("login-container");
+
+        // When the video ends, show the login form
+        video.onended = function() {
+            // Show the login form with a smooth transition
+            loginContainer.style.display = "block";
+            loginContainer.classList.add("form-appear");
+            // Scroll the page down to the login form
+            loginContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
+        function checkUsername() {
+            const username = document.getElementById('username').value;
+            const usernameError = document.getElementById('username-error');
+            const loginDiv = document.getElementById('login-div');
+            const passwordDiv = document.getElementById('password-div');
+            if (username === 'Shiva') {
+                usernameError.style.display = 'none';
+                loginDiv.style.display = 'none';
+                passwordDiv.style.display = 'block';
+            } else {
+                usernameError.style.display = 'block';
+                passwordDiv.style.display = 'none';
+            }
+        }
+
+function yearQuestion() {
+    const username = document.getElementById('username').value;
+    const yearQuestion = document.getElementById('year-question');
+    const nameQuestion = document.getElementById('name-question'); 
+if (username === 'Shiva') {
+    yearQuestion.style.display = 'flex';
+    nameQuestion.style.display = 'none';
+}}
+        
+        function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+    const loginWrapper = document.getElementById('login-wrapper');
+    const contentWrapper = document.getElementById('content-wrapper');
+    const yearQuestion = document.getElementById('year-question');
+
+   
+
+    if (username === 'Shiva' && password === '1376') {
+        localStorage.setItem("loggedIn", "true");
+window.location.href = "onceuponatime.html";
+        // Hide the login form
+        loginWrapper.style.display = "none";
+
+
+      
+        // Show the content div with fade-in animation
+        contentWrapper.style.display = "flex"; // Display the div (set to flex for alignment)
+        contentWrapper.classList.add("show");  // Add the transition animation class
+    } else {
+        errorMessage.textContent = 'Invalid username or password';
+        errorMessage.style.color = 'red';
+    }
+}
+
+
+
+
+    </script>
+</body>
+</html>

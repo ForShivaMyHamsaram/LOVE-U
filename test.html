@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Transition with Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            /* font-size: 3rem;
+            font-weight: bold; */
+            /* color: white; */
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .slide2 {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+            display: none;
+            max-width: 90%;
+            /* height: 70vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Different background colors for each slide */
+        .slide:nth-child(1) { background-color: #000; } /* Black for video */
+        .slide:nth-child(2) { background: url('snow-white-background.jpg'); background-size: cover; }
+        .slide:nth-child(3) { background-color: #3357ff; }
+        .slide:nth-child(4) { background-color: #ff33a8; }
+        .slide:nth-child(5) { background-color: #ffff33; color: black; }
+
+        /* Initially hide all slides except the first one */
+        .slide {
+            transform: translateY(100%);
+        }
+
+        /* Video should be full screen */
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        /* Next button */
+        /* button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            display: none; 
+        }
+
+        button:hover {
+            background-color: gray;
+        } */
+
+
+
+        h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #9a4a35;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #9a4a35;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #feae68;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Wrapper for login container */
+        #login-wrapper {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Login Container */
+        #login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+            display: none;
+            max-width: 90%;
+            /* height: 70vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* .login-div-content {
+            width: 90%;
+        } */
+        .login-div-button {
+            width: 99%;
+        }
+
+        .login-div-button:hover {
+            scale: 1.01;
+            opacity: 0.9;
+        }
+        .login-div-button-password {
+            width: 110%;
+        }
+        .login-div-button-password:hover {
+               scale: 1.01;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slide"> <!-- Video Slide -->
+            <video id="video" autoplay muted controls>
+                <source src="video1.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+            <div class="slide slide-2" id="login-wrapper">
+                <!-- Login Form -->
+                <div id="login-container">
+                    <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
+                    <h3 id="name-question">What is your name?</h3>
+                    <div id="login-div"> 
+                        <input class="login-div-content" type="text" id="username" placeholder="Username">
+                        <p class="login-div-content" id="username-error" style="color: red; display: none;">Username is incorrect</p>
+                        <button class="login-div-button" onclick="checkUsername(), yearQuestion()">Next</button>
+                    </div>
+                    
+                    <div class="login-div-content" id="password-div" style="display: none;">
+                        <h3 id="year-question" style="display: none;" >Princess was born in Iran. Enter your Iranian year of birth</h3>
+                        <input type="password" id="password" placeholder="Password">
+                        <button class="login-div-button-password" onclick="login()">Login</button>
+                    </div>
+                    <p id="error-message"></p>
+                </div>
+            </div>
+    
+
+
+
+
+        <div class="slide">Slide 3</div>
+        <div class="slide">Slide 4</div>
+        <div class="slide">Slide 5</div>
+    </div>
+
+    <button id="nextBtn">Next</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll(".slide");
+            const nextButton = document.getElementById("nextBtn");
+            const video = document.getElementById("video");
+            let currentSlide = 0;
+
+            // Function to update the slide based on URL
+            function showSlide(index) {
+                if (index >= 0 && index < slides.length) {
+                    slides.forEach((slide, i) => {
+                        slide.style.transform = i <= index ? "translateY(0)" : "translateY(100%)";
+                    });
+                    currentSlide = index;
+                    history.replaceState(null, "", `?slide=${currentSlide + 1}`);
+
+                    // Hide button on first slide, show it otherwise
+                    nextButton.style.display = currentSlide === 0 ? "none" : "block";
+                }
+            }
+
+            // Get slide number from URL on page load
+            const urlParams = new URLSearchParams(window.location.search);
+            const slideFromURL = parseInt(urlParams.get("slide")) || 1;
+            showSlide(slideFromURL - 1);
+
+            // Move to next slide after video ends
+            video.addEventListener("ended", () => {
+                if (currentSlide === 0) {
+                    showSlide(1);
+                }
+            });
+
+            // Button click event to go to the next slide
+            nextButton.addEventListener("click", () => {
+                if (currentSlide < slides.length - 1) {
+                    showSlide(currentSlide + 1);
+                } else {
+                    alert("No more slides!");
+                }
+            });
+        });
+
+
+        //LOGIN
+        
+    </script>
+
+</body>
+</html>
