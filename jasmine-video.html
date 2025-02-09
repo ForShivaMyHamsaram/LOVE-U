@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Iranian Beauty</title>
+    <style>
+        /* Ensure the video takes up the full width and height of the viewport */
+        video {
+            width: 100%;
+            height: 100vh; /* 100vh ensures the height covers the full viewport height */
+            object-fit: cover; /* Ensure the video covers the area without distortion */
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+    <video id="myVideo" src="videoplayback.mp4" autoplay controls></video>
+
+    <script>
+        // Select the video element
+        const video = document.getElementById('myVideo');
+
+        // Add event listener to detect when the video ends
+        video.addEventListener('ended', function() {
+            // Redirect to last-page.html when the video ends
+            window.location.href = 'last-slide.html';
+        });
+    </script>
+    
+</body>
+</html>

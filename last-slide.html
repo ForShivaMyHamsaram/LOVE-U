@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy END</title>
+</head>
+<body>
+ <style>
+    body {
+        background-image: url("happyend.jpg");
+            background-size: cover;  /* Ensures the image covers the entire viewport */
+            background-position: center top 35%;  /* Centers the image */
+            background-repeat: no-repeat;  /* Prevents image repetition */
+            margin: 0;
+            height: 100vh;
+    }
+
+.genie {
+    display: none;
+    width: 800px;
+    height: 650px;
+    position: absolute;
+ 
+}
+.genie-text {
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    background-color: brown;
+    width: 600px;
+    height: 200px;
+    padding: 30px;
+    border-radius: 20px;
+}
+ </style>
+
+ <img src="genie.png" class="genie" alt="">
+ <div class="genie-text"><p style="color: white; font-size: 50px;">AND THEY LIVED HAPPILY. THE END </p></div>
+
+
+
+ <script>
+setTimeout(function() {
+   document.querySelector('.genie').style.display = 'block';
+   document.querySelector('.genie-text').style.display = 'block';
+}, 5000);
+ </script>
+</body>
+</html>

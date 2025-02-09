@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Once Upon A Time</title>
+    <style>
+       body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgb(223, 204, 204);
+}
+
+.story {
+    display: none;
+    width: 80%; /* Adjust image size */
+    max-width: 600px; /* Prevent images from being too large */
+    height: auto;
+    object-fit: contain;
+    text-align: center;
+}
+
+.story img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Adds shadow */
+    margin: 20px 0; /* Adds spacing between images */
+}
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" autoplay loop>
+        <source src="song-upon.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="story story11 active">
+        <img src="11.png" alt="">
+    </div>
+    <div class="story story22">
+        <img src="22.png" alt="">
+    </div>
+    <div class="story story33">
+        <img src="33.png" alt="">
+    </div>
+    <div class="story story44">
+        <img src="44.png" alt="">
+    </div>
+    <div class="story story55">
+        <img src="55.png" alt="">
+    </div>
+    <div class="story story66">
+        <img src="66.png" alt="">
+    </div>
+    <div class="story story77">
+        <img src="77.png" alt="">
+    </div>
+    <div class="story story88">
+        <img src="88.png" alt="">
+    </div>
+    <div class="story story99">
+        <img src="99.png" alt="">
+    </div>
+    <div class="story story999">
+        <img src="999.png" alt="">
+    </div>
+
+    <div class="story story999">
+        <img src="9999.png" alt="">
+    </div>
+
+    <div class="story story999">
+        <img src="99999.png" alt="">
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.story');
+        let currentIndex = 0;
+
+        function changeImage() {
+            // Hide the current image
+            images[currentIndex].classList.remove('active');
+
+            // Move to the next image
+            currentIndex = (currentIndex + 1) % images.length;
+
+            // Show the next image
+            images[currentIndex].classList.add('active');
+
+            // If it's the last image, wait 10 seconds then redirect
+            if (currentIndex === images.length - 1) {
+                setTimeout(() => {
+                    window.location.href = 'arabian.html';
+                }, 8000); // 10 seconds delay
+            }
+        }
+
+        // Change image every 9 seconds
+        setInterval(changeImage, 9000);
+
+           // Fix autoplay issues in some browsers
+           window.addEventListener('click', () => {
+            document.getElementById("background-music").play();
+        });
+    </script>
+
+</body>
+</html>
