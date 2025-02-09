@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show</title>
+    <style>
+
+        /* In pink.html */
+body {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 1s ease, transform 1s ease;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 2;
+        }
+
+        .slide.previous {
+            opacity: 0;
+            transform: translateY(-100%);
+            z-index: 1;
+        }
+
+        /* Button styling */
+        .next-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .last-next-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .next-button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        .next-button-effect {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    animation: buttonAnimation 1.5s infinite ease-in-out;
+}
+
+/* Keyframes for size animation */
+@keyframes buttonAnimation {
+    0% {
+        transform: scale(1); /* Original size */
+        background-color: pink;
+
+    }
+    50% {
+        transform: scale(1.1); /* Slightly larger */
+        background-color: rgb(221, 93, 114);
+    }
+    100% {
+        transform: scale(1); /* Return to original size */
+        background-color: pink;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="slide active" style="background-image: url('button-improved.gif');">
+        <button class="next-button next-button-effect">Next Slide</button>
+    </div>
+    <div class="slide" style="background-image: url('pink-new-1.gif');">
+        <button class="next-button">Next Slide</button>
+    </div>
+    <div class="slide" style="background-image: url('jasmine.jpg');">
+        <button class="next-button">Next Slide</button>
+    </div>
+    <div class="slide" style="background-image: url('everything.gif');">
+        <button class="next-button">Next Slide</button>
+    </div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b');">
+        <button class="next-button last-next-button" onclick="window.location.href = 'jasmine-video.html';">Finish</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+
+        document.querySelectorAll('.next-button').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (index < slides.length - 1) {
+                    slides[currentIndex].classList.remove('active');
+                    slides[currentIndex].classList.add('previous'); // Move old slide up
+
+                    currentIndex++;
+                    slides[currentIndex].classList.add('active'); // Move new slide into view
+                }
+            });
+        });
+
+        // When the pink.html page is loaded, apply the fade-in effect
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);  // Delay to ensure the body has fully loaded
+});
+
+
+
+    </script>
+
+</body>
+</html>
