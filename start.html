@@ -275,7 +275,48 @@
             margin-top: 10px;
         }
 
-        
+        #year-question {
+            width: 314px;
+            font-style: bold;
+        }
+
+        /* Notification Styling */
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 9999;
+    display: none; /* Hidden initially */
+}
+
+.notification h1 {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    color: #9a4a35;
+    margin-bottom: 20px;
+}
+
+.notification button {
+    background-color: #feae68;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.notification button:hover {
+    background-color: #d88d56;
+    transition: 0.3s;
+}
+
     </style>
 </head>
 <body>
@@ -298,7 +339,7 @@
             </div>
             
             <div class="login-div-content" id="password-div" style="display: none;">
-                <h3 id="year-question" style="display: none;" >Princess was born in Iran. Enter your Iranian year of birth</h3>
+                <h3 id="year-question" style="display: none;" >The Princess was born in Iran. Enter your Iranian year of birth using numbers</h3>
                 <input type="password" id="password" placeholder="Password">
                 <button class="login-div-button-password" onclick="login()">Login</button>
             </div>
@@ -307,7 +348,10 @@
     </div>
 
 
-
+    <div class="notification">
+        <h1>The Princess was born in Iran. Enter your Iranian year of birth using numbers</h1>
+        <button id="continueBtn">Continue</button>
+    </div>
 
 
   
@@ -316,69 +360,76 @@
 
 
     <script>
-        const video = document.getElementById("video");
-        const loginContainer = document.getElementById("login-container");
+       const video = document.getElementById("video");
+const loginContainer = document.getElementById("login-container");
 
-        // When the video ends, show the login form
-        video.onended = function() {
-            // Show the login form with a smooth transition
-            loginContainer.style.display = "block";
-            loginContainer.classList.add("form-appear");
-            // Scroll the page down to the login form
-            loginContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-        };
+// When the video ends, show the login form
+video.onended = function() {
+    loginContainer.style.display = "block";
+    loginContainer.classList.add("form-appear");
+    loginContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
-        function checkUsername() {
-            const username = document.getElementById('username').value;
-            const usernameError = document.getElementById('username-error');
-            const loginDiv = document.getElementById('login-div');
-            const passwordDiv = document.getElementById('password-div');
-            if (username === 'Shiva') {
-                usernameError.style.display = 'none';
-                loginDiv.style.display = 'none';
-                passwordDiv.style.display = 'block';
-            } else {
-                usernameError.style.display = 'block';
-                passwordDiv.style.display = 'none';
-            }
-        }
+function checkUsername() {
+    const username = document.getElementById('username').value.trim();
+    const usernameError = document.getElementById('username-error');
+    const loginDiv = document.getElementById('login-div');
+    const passwordDiv = document.getElementById('password-div');
+
+    // Allowed usernames
+    const validUsernames = ['Shiva', 'shiva', 'Alice', 'Bob']; // Add more usernames here
+
+    if (validUsernames.includes(username)) {
+        usernameError.style.display = 'none';
+        loginDiv.style.display = 'none';
+        passwordDiv.style.display = 'block';
+    } else {
+        usernameError.style.display = 'block';
+        passwordDiv.style.display = 'none';
+    }
+}
 
 function yearQuestion() {
-    const username = document.getElementById('username').value;
+    const username = document.getElementById('username').value.trim();
     const yearQuestion = document.getElementById('year-question');
     const nameQuestion = document.getElementById('name-question'); 
-if (username === 'Shiva') {
-    yearQuestion.style.display = 'flex';
-    nameQuestion.style.display = 'none';
-}}
-        
-        function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+
+    // Allowed usernames
+    const validUsernames = ['Shiva', 'shiva', 'Alice', 'Bob'];
+
+    if (validUsernames.includes(username)) {
+        yearQuestion.style.display = 'flex';
+        nameQuestion.style.display = 'none';
+    }
+}
+
+function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
     const errorMessage = document.getElementById('error-message');
     const loginWrapper = document.getElementById('login-wrapper');
     const contentWrapper = document.getElementById('content-wrapper');
-    const yearQuestion = document.getElementById('year-question');
 
-   
+    // Allowed usernames and common password
+    const validUsernames = ['Shiva', 'shiva']; // Add more usernames
+    const correctPassword = '1376'; // Common password
 
-    if (username === 'Shiva' && password === '1376') {
+    // Check if username is in the allowed list and the password matches
+    if (validUsernames.includes(username) && password === correctPassword) {
         localStorage.setItem("loggedIn", "true");
-window.location.href = "onceuponatime.html";
+        window.location.href = "onceuponatime.html";
+
         // Hide the login form
         loginWrapper.style.display = "none";
 
-
-      
         // Show the content div with fade-in animation
-        contentWrapper.style.display = "flex"; // Display the div (set to flex for alignment)
-        contentWrapper.classList.add("show");  // Add the transition animation class
+        contentWrapper.style.display = "flex";
+        contentWrapper.classList.add("show");
     } else {
         errorMessage.textContent = 'Invalid username or password';
         errorMessage.style.color = 'red';
     }
 }
-
 
 
 
