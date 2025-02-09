@@ -3,436 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video and Login Transition</title>
-    <link rel="shortcut icon" href="istockphoto-1439973042-612x612.jpg" type="image/x-icon">
+    <title>Notification</title>
     <style>
-        /* Full-screen video */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Wrapper for login container */
-        #login-wrapper {
+        /* Ensures the entire body takes full height */
+        body {
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
             height: 100vh; /* Full viewport height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0; /* Removes default margin */
+            font-family: Arial, sans-serif; /* Adds a clean font */
+            background-image: url('101010.jpeg');
+            background-position: no-repeat;
+            background-size: cover;
+
         }
 
-        /* Login Container */
-        #login-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 350px;
-            display: none;
-            max-width: 90%;
-            /* height: 70vh; */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
+        /* Centers the text block and adds spacing */
+        .content {
+            text-align: center; /* Centers text inside */
+            background-color: #ffffff; /* White background for the content */
+            padding: 20px; /* Adds some padding around the content */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+            width: 90%; /* Ensures content is not too wide */
+            max-width: 600px; /* Limits the content to a max-width */
         }
 
-        h2 {
-            font-family: 'Georgia', serif;
-            font-size: 24px;
-            color: #9a4a35;
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            font-family: 'Georgia', serif;
-            font-size: 20px;
-            color: #9a4a35;
-            margin-bottom: 20px;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #9a4a35;
-            border-radius: 10px;
-            font-size: 16px;
+        h1 {
+            font-size: 20px; /* Adjusts font size */
+            margin: 10px 0; /* Adds vertical spacing between headings */
         }
 
         button {
-            background-color: #feae68;
-            color: white;
-            cursor: pointer;
+            background-color: #007bff; /* Blue background color */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Padding inside the button */
+            font-size: 16px; /* Font size for the button text */
+            border: none; /* Removes default border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Changes cursor to pointer when hovering */
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
         }
 
-        #error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 15px;
+        button:hover {
+            background-color: #0056b3; /* Darker blue when hovered */
         }
 
-        .form-appear {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        #login-wrapper {
-            background-image: url('snow-white-background.jpg');
-            background-size: cover;
-            background-position: center;
-         
-        }
-
-        
-
-        @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hidden {
-    display: none;
-}
-
-.show {
-    display: flex;
-    animation: fadeIn 1s ease-out forwards;
-}
-
-        /* Fullscreen wrapper for second page content */
-        #content-wrapper {
-            height: 100%;
-            width: 100%;
-            background-color: #f0f0f0; /* You can set a background color or image */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        #slider-container {
-            width: 80%;
-            height: 80%;
-            background-color: rgba(255, 255, 255, 0.8);
-            /* padding: 20px; */
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .login-div-content {
-            width: 90%;
-        }
-        .login-div-button {
-            width: 99%;
-        }
-
-        .login-div-button:hover {
-            scale: 1.01;
-            opacity: 0.9;
-        }
-        .login-div-button-password {
-            width: 110%;
-        }
-        .login-div-button-password:hover {
-               scale: 1.01;
-            opacity: 0.9;
-        }
-
-
-
-
-
-        #slider-container {
-            display: block;
-            width: 100%;
-            max-width: 600px;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            margin: auto;
-        }
-
-        .slider {
-            display: flex;
-            width: 300%;
-            height: 100%;
-            transition: transform 1.5s ease-in-out;
-        }
-
-        .slide {
-            width: 33.33%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-         
-        }
-
-        .slider .slide.played {
-            filter: none;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            width: 47px;
-            height: 47px;
-            border-radius: 50%;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        .play-btn {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            z-index: 10;
-            border-radius: 5px;
-        }
-
-        .heart {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: red;
-            animation: heartAnimation 1s ease-in-out forwards;
-        }
-
-        @keyframes heartAnimation {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            .content {
+                padding: 15px; /* Reduced padding */
+                width: 95%; /* Content takes up more space on smaller screens */
             }
-            50% {
-                opacity: 0.7;
-                transform: translateY(-50px) scale(1.5);
+
+            h1 {
+                font-size: 18px; /* Slightly smaller text on smaller screens */
             }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(2);
+
+            button {
+                font-size: 14px; /* Smaller button text */
+                padding: 8px 16px; /* Smaller button size */
             }
         }
 
-        .progress-container {
-            width: 80%;
-            margin: 20px auto;
-            text-align: center;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 16px; /* Even smaller text for very small screens */
+            }
+
+            button {
+                font-size: 14px; /* Consistent with medium screen size */
+                padding: 8px 16px; /* Adjust button size */
+            }
         }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar .progress {
-            height: 100%;
-            background-color: #28a745;
-            width: 0;
-            transition: width 0.5s;
-        }
-
-        .time {
-            margin-top: 10px;
-        }
-
-        #year-question {
-            width: 314px;
-            font-style: bold;
-        }
-
-        /* Notification Styling */
-.notification {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    z-index: 9999;
-    display: none; /* Hidden initially */
-}
-
-.notification h1 {
-    font-family: 'Georgia', serif;
-    font-size: 18px;
-    color: #9a4a35;
-    margin-bottom: 20px;
-}
-
-.notification button {
-    background-color: #feae68;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.notification button:hover {
-    background-color: #d88d56;
-    transition: 0.3s;
-}
-
     </style>
 </head>
 <body>
-    <!-- Video Element -->
-    <video id="video" autoplay controls>
-        <source src="video1.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Wrapper for login form -->
-    <div id="login-wrapper">
-        <!-- Login Form -->
-        <div id="login-container">
-            <h2>ONLY TRUE PRINCESS CAN ACCESS THIS WEBSITE</h2>
-            <h3 id="name-question">What is your name?</h3>
-            <div id="login-div"> 
-                <input class="login-div-content" type="text" id="username" placeholder="Username">
-                <p class="login-div-content" id="username-error" style="color: red; display: none;">Username is incorrect</p>
-                <button class="login-div-button" onclick="checkUsername(), yearQuestion()">Next</button>
-            </div>
-            
-            <div class="login-div-content" id="password-div" style="display: none;">
-                <h3 id="year-question" style="display: none;" >The Princess was born in Iran. Enter your Iranian year of birth using numbers</h3>
-                <input type="password" id="password" placeholder="Password">
-                <button class="login-div-button-password" onclick="login()">Login</button>
-            </div>
-            <p id="error-message"></p>
-        </div>
+    <div class="content">
+        <h1>Open this website with your laptop</h1>
+        <h1>It won't work on your phone correctly</h1>
+        <h1>When you are ready to open it, click on the button</h1>
+        <button onclick="window.location.href = 'start.html';">Continue with laptop</button>
     </div>
-
-
-    <div class="notification">
-        <h1>The Princess was born in Iran. Enter your Iranian year of birth using numbers</h1>
-        <button id="continueBtn">Continue</button>
-    </div>
-
-
-  
-
-    
-
-
-    <script>
-       const video = document.getElementById("video");
-const loginContainer = document.getElementById("login-container");
-
-// When the video ends, show the login form
-video.onended = function() {
-    loginContainer.style.display = "block";
-    loginContainer.classList.add("form-appear");
-    loginContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
-function checkUsername() {
-    const username = document.getElementById('username').value.trim();
-    const usernameError = document.getElementById('username-error');
-    const loginDiv = document.getElementById('login-div');
-    const passwordDiv = document.getElementById('password-div');
-
-    // Allowed usernames
-    const validUsernames = ['Shiva', 'shiva', 'Alice', 'Bob']; // Add more usernames here
-
-    if (validUsernames.includes(username)) {
-        usernameError.style.display = 'none';
-        loginDiv.style.display = 'none';
-        passwordDiv.style.display = 'block';
-    } else {
-        usernameError.style.display = 'block';
-        passwordDiv.style.display = 'none';
-    }
-}
-
-function yearQuestion() {
-    const username = document.getElementById('username').value.trim();
-    const yearQuestion = document.getElementById('year-question');
-    const nameQuestion = document.getElementById('name-question'); 
-
-    // Allowed usernames
-    const validUsernames = ['Shiva', 'shiva'];
-
-    if (validUsernames.includes(username)) {
-        yearQuestion.style.display = 'flex';
-        nameQuestion.style.display = 'none';
-    }
-}
-
-function login() {
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const errorMessage = document.getElementById('error-message');
-    const loginWrapper = document.getElementById('login-wrapper');
-    const contentWrapper = document.getElementById('content-wrapper');
-
-    // Allowed usernames and common password
-    const validUsernames = ['Shiva', 'shiva']; // Add more usernames
-    const correctPassword = '1376'; // Common password
-
-    // Check if username is in the allowed list and the password matches
-    if (validUsernames.includes(username) && password === correctPassword) {
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "onceuponatime.html";
-
-        // Hide the login form
-        loginWrapper.style.display = "none";
-
-        // Show the content div with fade-in animation
-        contentWrapper.style.display = "flex";
-        contentWrapper.classList.add("show");
-    } else {
-        errorMessage.textContent = 'Invalid username or password';
-        errorMessage.style.color = 'red';
-    }
-}
-
-
-
-    </script>
 </body>
 </html>
