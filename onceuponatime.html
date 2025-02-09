@@ -87,6 +87,14 @@
     </div>
 
     <script>
+
+const backgroundImage = new Image();
+        backgroundImage.src = 'gif-back1.gif';
+
+        backgroundImage.onload = () => {
+            document.body.style.backgroundImage = `url(${backgroundImage.src})`; // Apply background once loaded
+        };
+ 
         const images = document.querySelectorAll('.story');
         let currentIndex = 0;
 
