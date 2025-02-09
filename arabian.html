@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arabian</title>
+    <style>
+        /* Set background image to show the entire image */
+        body {
+            background-image: url("arabian-3.jpg");
+            background-size: cover;  /* Ensures the entire image is visible */
+            background-position: top;  /* Centers the background image */
+            background-repeat: no-repeat;  /* Prevents the image from repeating */
+            background-attachment: fixed;  /* Keeps the image fixed during scroll */
+            margin: 0;  /* Removes default margin */
+            height: 100vh;  /* Makes the body take full viewport height */
+            position: relative;
+        }
+
+        /* Ensures that the image covers all screen sizes responsively */
+        html, body {
+            height: 100%;
+        }
+
+        /* Optional: Add a fallback background color in case the image doesn't load */
+        body {
+            background-color: #f4f4f4;
+        }
+
+        /* Lamp styling */
+        .lamp {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            cursor: pointer;
+            animation: lampAnimation 2s infinite alternate ease-in-out;
+        }
+
+        /* Animation to move the lamp up and down */
+        @keyframes lampAnimation {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Hidden image */
+        .hidden-image {
+    display: none;
+    position: absolute;
+    top: 21%;
+    /* left: 76%; */
+    transform: translate(-50%, -50%);
+    width: 514px;
+    height: 328px;
+    right: -382px;
+}
+
+
+.typewriter {
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 3%;
+    width: 100;
+    background-color: rgb(240, 143, 143);
+
+
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.typewriter1 {
+    display: none;
+    position: absolute;
+    top: 46%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+
+
+    border-radius: 20px;
+    padding: 40px;
+    
+}
+
+.typewriter2 {
+    display: none;
+    position: absolute;
+    top: 62%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.typewriter3 {
+    display: none;
+    position: absolute;
+    top: 1%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+    font-style: 14px;
+}
+
+.typewriter4 {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 3%;
+    width: 89%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 30px;
+    font-style: 1rem;
+}
+
+.typewriter5 {
+    display: none;
+    position: absolute;
+    top: 40%;
+    /* left: 5%; */
+    width: 49%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+    right: 4%;
+}
+
+.typewriter6 {
+    display: none;
+    position: absolute;
+    top: 62%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.typewriter7 {
+    display: none;
+    position: absolute;
+    top: 61%;
+    /* left: 3%; */
+    width: 37%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+    right: 4%;
+}
+
+.typewriter8 {
+    display: none;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+
+
+/*  */
+.typewriter9 {
+    display: none;
+    position: absolute;
+    top: 1%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+    font-size: 12px;
+}
+
+.typewriter10 {
+    display: none;
+    position: absolute;
+    top: 18%;
+    left: 3%;
+    width: 87%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+
+}
+
+
+.typewriter11 {
+    display: none;
+    position: absolute;
+    top: 40%;
+ right: 4%;
+    width: 60%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.typewriter12 {
+    display: none;
+    position: absolute;
+    top: 58%;
+    right: 4%;
+    width: 60%;
+    background-color: rgb(240, 143, 143);
+    border-radius: 20px;
+    padding: 40px;
+    font-style: 14px;   
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.show-me {
+    display: none;
+    position: absolute;
+    bottom: 5%;
+    width: 400px;
+    height: 100px;
+    font-size: 20px;
+    background-color: rgb(206, 106, 186);
+    right: 4%;
+    border-radius: 20px;
+    cursor: pointer;
+    
+    /* Apply animation */
+    animation: floatAnimation 2s ease-in-out infinite;
+}
+
+
+
+.typewriter h1, .typewriter1 h1, .typewriter2 h1, .typewriter3 h1, .typewriter4 h1, .typewriter5 h1, .typewriter6 h1, .typewriter7 h1, .typewriter8 h1, .typewriter8 h1, .typewriter9 h1, .typewriter10 h1, .typewriter11 h1, .typewriter12 h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+.text1 p, .text2 p, .text3 p, .text4 p, .text5 p, .text6 p, .text7 p, .text8 p {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+.click-on-me-img {
+    background-color: #ffcdcd;
+    width: 351px;
+    position: absolute;
+    top: 67%;
+    left: 33%;
+    padding: 20px;
+    width: 500px;
+    border-radius: 20px;
+    color: rgb(193, 121, 27);
+}
+
+.button-princess {
+    display: none;
+    position: absolute;
+    bottom: 0%;
+    left: 35%;
+    width: 400px;
+    height: 100px;
+    font-size: 20px;
+    background-color: rgb(206, 106, 186);
+    border-radius: 20px;
+    cursor: pointer;
+
+    animation: floatAnimation 2s ease-in-out infinite;
+}
+.button-princess:hover {
+    background-color: rgb(250, 103, 235);
+}
+
+.button-secret {
+    display: none;
+    position: absolute;
+    bottom: 5%;
+    /* left: 57%; */
+    width: 400px;
+    height: 100px;
+    font-size: 20px;
+    background-color: rgb(206, 106, 186);
+    right: 4%;
+    border-radius: 20px;
+    cursor: pointer;
+
+    animation: floatAnimation 2s ease-in-out infinite;
+}
+
+.button-secret:hover {
+    background-color: rgb(250, 103, 235);
+}
+
+.shocked {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 300px;
+}
+
+.surprised  {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 500px;
+    height: 400px;
+}
+
+.secret {
+    display: none;
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    bottom: 0;
+}
+
+.telling {
+    display: none;
+    position: absolute;
+    right: 19%;
+    width: 809px;
+    top: 35%;
+    height: 500px;
+}
+
+.telling-text {
+    margin-top: 20px;
+    display: none;
+    width: 500px;
+    font-size: 3rem;
+    margin: 0 auto;
+    background-color: antiquewhite;
+    padding: 20px;
+    border-radius: 20px;
+ 
+}
+
+.last-picture {
+    display: none;
+    position: absolute;
+  bottom: 0;  
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Lamp image -->
+    <img class="lamp" id="lamp" src="lamp.png" alt="Lamp" onclick="showImage()">
+
+ 
+<h1 class="click-on-me-img">I have been in a supermarket. Even thought I wanted to buy a microwave, I found this magical lamp for you. Click on it                - Ivan </h1>
+
+
+    <p class="telling-text">You mean everything to IVAN. You are his love, his Princess, and his life</p>
+
+    <!-- Hidden image that will be shown after clicking the lamp -->
+    <img id="hiddenImage" class="hidden-image" src="jiney.png">
+   <img class="shocked" src="shocked.png" alt="">
+<img class="surprised" src="name.png" alt="">
+<img class="secret" src="secret.png" alt="">
+<img class="telling" src="telling3.png" alt="">
+<img class="last-picture" src="last-picture.png" alt="">
+
+
+    <div class="typewriter">
+        <h1>WOW! I have been alive for more than 1000 years </h1>
+        <audio id="genieVoice">
+            <source src="1.1.mp3" type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="typewriter1">
+        <h1> and have never seen such a BEAUTY</h1>
+        <audio id="genieVoice2">
+            <source src="2.mp3" type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="typewriter2">
+        <h1> Tell me <strong>IRANIAN PRINCESS </strong>, is your name  <strong>SHIVA </strong>?</h1>
+        <audio id="genieVoice3">
+            <source src="3.mp3" type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="typewriter3">
+        <h1> Usually, when people find my lamp, I give them THREE WISHES</h1>
+        <audio id="genieVoice4">
+            <source src="4.mp3" type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="typewriter4">
+        <h1> But I have never MET PRINCESS</h1>
+        <audio id="genieVoice5">
+            <source src="5.mp3" type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="typewriter5">
+        <h1> For you, I have something SPECIAL</h1>
+        <audio id="genieVoice6">
+            <source src="6.mp3" type="audio/mp3">
+        </audio>
+      </div>  
+
+      <div class="typewriter8">
+        <h1> I will tell you THE SECRET</h1>
+        <audio id="genieVoice6">
+            <source src="8.mp3" type="audio/mp3">
+        </audio>
+      </div>  
+
+      <div class="typewriter7">
+        <h1>     Do you want to hear it?</h1>
+    
+        <audio id="genieVoice8">
+            <source src="7.mp3" type="audio/mp3">
+        </audio>
+      </div> 
+  
+      <button class="button-secret" onclick="section3()">YEEEESS</button>
+
+
+
+   <button class="button-princess" onclick="section2()">Yes, I am Princess Shiva</button>
+
+ <div class="typewriter9 ">   <h1 >Now I have to come back to studying. You wont believe but I am a medical student. </h1> 
+    <audio id="genieVoice--1">
+        <source src="m11.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<div class="typewriter10">   <h1 >I study pharmacy at Medical Gulf univercity</h1>
+    <audio id="genieVoice--2">
+        <source src="m22.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<div class="typewriter11">  <h1 >Even after thousands of years I still learn it </h1>   <audio id="genieVoice--3">
+    <source src="m33.mp3" type="audio/mp3">
+</audio>
+</div>
+<div class="typewriter12">   <h1>But before I move I want to show you something</h1>
+
+    <audio id="genieVoice--4">
+        <source src="m44.mp3" type="audio/mp3">
+    </audio></div>
+
+
+   <button class="show-me" onclick="redirect()">Show me</button>
+
+
+
+
+    <script>
+        // Function to log "LAMP" to the console and show the hidden image when clicked
+        function showImage() {
+    console.log("LAMP");
+    document.getElementById("genieVoice").play();
+    document.getElementById("hiddenImage").style.display = "block";  
+    document.getElementById("lamp").style.display = "none";  
+    document.querySelector(".typewriter").style.display = "block";
+    
+    document.querySelector(".click-on-me-img").style.display = "none";
+
+    // Show typewriter1 after 4.7 seconds
+    setTimeout(() => {
+        document.querySelector(".typewriter1").style.display = "block";
+    document.getElementById("genieVoice2").play();
+
+    }, 4700);
+    
+    // Show typewriter2 and hide hiddenImage after 8.3 seconds
+    setTimeout(() => {
+        document.querySelector(".typewriter2").style.display = "block";
+        document.getElementById("hiddenImage").style.display = "none"; 
+        document.querySelector(".shocked").style.display = "block";
+    document.getElementById("genieVoice3").play();
+
+    }, 8300);
+
+    // Show the button and switch shocked → surprised after 15 seconds
+    setTimeout(() => {
+        document.querySelector(".button-princess").style.display = "block";
+        document.querySelector(".shocked").style.display = "none";
+        document.querySelector(".surprised").style.display = "block";
+     
+
+    }, 11000);
+}
+
+function section2() {
+    document.querySelector(".button-princess").style.display = "none";
+      
+        document.querySelector(".surprised").style.display = "none";
+
+        document.querySelector(".typewriter2").style.display = "none";
+        document.querySelector(".typewriter1").style.display = "none";
+        document.querySelector(".typewriter").style.display = "none";
+        document.querySelector(".shocked").style.display = "none";
+     
+        document.querySelector(".secret").style.display = "block";
+ 
+
+      
+
+        setTimeout(() => {
+        document.querySelector(".typewriter3").style.display = "block";
+        document.getElementById("genieVoice4").play();
+
+
+    }, 1000);
+    
+    // Show typewriter2 and hide hiddenImage after 8.3 seconds
+    setTimeout(() => {
+        document.querySelector(".typewriter4").style.display = "block";
+        document.getElementById("genieVoice5").play();
+
+
+
+    }, 5300);
+
+    // Show the button and switch shocked → surprised after 15 seconds
+    setTimeout(() => {
+        document.querySelector(".typewriter5").style.display = "block";
+    //  document.querySelector(".button-secret").style.display = "block";
+    document.getElementById("genieVoice6").play();
+
+ 
+
+
+    }, 9000);
+
+    setTimeout(() => {
+        // document.querySelector(".typewriter5").style.display = "block";
+     document.querySelector(".typewriter7").style.display = "block";
+    document.getElementById("genieVoice8").play();
+
+
+    }, 13000);
+
+    setTimeout(() => {
+        // document.querySelector(".typewriter5").style.display = "block";
+     document.querySelector(".button-secret").style.display = "block";
+
+    }, 17000);
+}
+
+function section3() {
+    document.querySelectorAll('.typewriter, .typewriter1, .typewriter2, .typewriter3, .typewriter4, .typewriter5, .typewriter6, .typewriter7, .typewriter8, .button-secret, .button-princess, .shocked, .surprised, .secret').forEach(el => {
+        el.style.display = "none";
+    });
+
+    document.querySelector(".telling").style.display = "block";
+    document.querySelector(".telling-text").style.display = "block";
+
+
+
+    // First timeout: hide .telling and show .typewriter9
+    setTimeout(() => {
+        document.querySelector(".telling").style.display = "none";
+        document.querySelector(".telling-text").style.display = "none";
+        document.querySelector(".typewriter9").style.display = "block";
+    document.querySelector(".last-picture").style.display = "block";
+document.querySelector("body").style.backgroundImage = "url('background22.jpg')";
+
+    document.getElementById("genieVoice--1").play();
+    }, 10000);
+
+    // Second timeout: show .typewriter10 after 5 more seconds (10 seconds total)
+    setTimeout(() => {
+        document.querySelector(".typewriter10").style.display = "block";
+        document.getElementById("genieVoice--2").play();
+    }, 15000);
+
+    // Third timeout: show .typewriter11 after 3 more seconds (13 seconds total)
+    setTimeout(() => {
+        document.querySelector(".typewriter11").style.display = "block";
+        document.getElementById("genieVoice--3").play();
+    }, 20000);
+
+    // Fourth timeout: show .typewriter12 after 3 more seconds (16 seconds total)
+    setTimeout(() => {
+        document.querySelector(".typewriter12").style.display = "block";
+        document.querySelector(".show-me").style.display = "block";
+        document.getElementById("genieVoice--4").play();
+    }, 25000);
+}
+
+function redirect() {
+    window.location.href = "slider.html";
+}
+
+    </script>
+
+</body>
+</html>

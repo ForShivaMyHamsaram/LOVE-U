@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <style>
+        /* Ensures the entire body takes full height */
+        body {
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Removes default margin */
+            font-family: Arial, sans-serif; /* Adds a clean font */
+            background-color: #f7f7f7; /* Light background color */
+        }
+
+        /* Centers the text block and adds spacing */
+        .content {
+            text-align: center; /* Centers text inside */
+            background-color: #ffffff; /* White background for the content */
+            padding: 20px; /* Adds some padding around the content */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+            width: 90%; /* Ensures content is not too wide */
+            max-width: 600px; /* Limits the content to a max-width */
+        }
+
+        h1 {
+            font-size: 20px; /* Adjusts font size */
+            margin: 10px 0; /* Adds vertical spacing between headings */
+        }
+
+        button {
+            background-color: #007bff; /* Blue background color */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Padding inside the button */
+            font-size: 16px; /* Font size for the button text */
+            border: none; /* Removes default border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Changes cursor to pointer when hovering */
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue when hovered */
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            .content {
+                padding: 15px; /* Reduced padding */
+                width: 95%; /* Content takes up more space on smaller screens */
+            }
+
+            h1 {
+                font-size: 18px; /* Slightly smaller text on smaller screens */
+            }
+
+            button {
+                font-size: 14px; /* Smaller button text */
+                padding: 8px 16px; /* Smaller button size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 16px; /* Even smaller text for very small screens */
+            }
+
+            button {
+                font-size: 14px; /* Consistent with medium screen size */
+                padding: 8px 16px; /* Adjust button size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Open this website with your laptop</h1>
+        <h1>It won't work on your phone correctly</h1>
+        <h1>When you are ready to open it, click on the button</h1>
+        <button onclick="window.location.href = 'start.html';">Continue with laptop</button>
+    </div>
+</body>
+</html>
