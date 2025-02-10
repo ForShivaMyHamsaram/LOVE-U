@@ -116,19 +116,26 @@ body.loaded {
 </head>
 <body>
 
+    <audio id="background-music" autoplay loop>
+        <source src="kiss.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="slide active" style="background-image: url('button-improved.gif');">
         <button class="next-button next-button-effect">Next Slide</button>
     </div>
+    <div class="slide" style="background-image: url('sun.gif');">
+        <button class="next-button">Next Slide</button>
+    </div>
+
     <div class="slide" style="background-image: url('pink-new-1.gif');">
         <button class="next-button">Next Slide</button>
     </div>
-    <div class="slide" style="background-image: url('jasmine.jpg');">
+    <div class="slide" style="background-image: url('Jasmine-gif-1.gif');">
         <button class="next-button">Next Slide</button>
     </div>
     <div class="slide" style="background-image: url('everything.gif');">
-        <button class="next-button">Next Slide</button>
-    </div>
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b');">
+
         <button class="next-button last-next-button" onclick="window.location.href = 'jasmine-video.html';">Finish</button>
     </div>
 
@@ -157,6 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+    window.addEventListener('click', () => {
+            document.getElementById("background-music").play();
+        });
     </script>
 
 </body>
