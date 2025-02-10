@@ -8,12 +8,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ecd8d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('11_back.jpg');
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+            
         }
 
         #slider-container {
@@ -176,6 +180,7 @@
 } 
 
 .letsgo {
+    position: absolute;
     display: none;
     width: 173px;
     height: 46px;
@@ -185,8 +190,8 @@
     border: none;
     font-size: 16px;
     margin-right: 20px;
-
     animation: floatAnimation 2s ease-in-out infinite;
+    bottom: 2%;
 }
 
 .letsgo:hover {
@@ -227,11 +232,11 @@
     </style>
 </head>
 <body>
-
+<!-- 
     <audio id="background-music" autoplay loop>
         <source src="kiss.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-    </audio>
+    </audio> -->
 
 <div class="notification1">
     <p>Click this button to check more slides</p>
@@ -261,9 +266,9 @@
 
 
     // Fix autoplay issues in some browsers
-    window.addEventListener('click', () => {
-            document.getElementById("background-music").play();
-        });
+    // window.addEventListener('click', () => {
+    //         document.getElementById("background-music").play();
+    //     });
 
 
         let currentIndex = 0;
