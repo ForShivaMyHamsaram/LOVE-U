@@ -6,47 +6,81 @@
     <title>Once Upon A Time</title>
     <style>
        body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    /* background-color: rgb(223, 204, 204); */
-    background-image: url('gif-back1.gif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('gif-back1.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-.story {
-    display: none;
-    width: 80%; /* Adjust image size */
-    max-width: 600px; /* Prevent images from being too large */
-    height: auto;
-    object-fit: contain;
-    text-align: center;
-}
+        .story {
+            display: none;
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            text-align: center;
+        }
 
-.story img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px; /* Optional: Adds rounded corners */
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Adds shadow */
-    margin: 20px 0; /* Adds spacing between images */
-}
+        .story img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+        }
 
         .active {
             display: block;
         }
+
+        /* Notification Overlay */
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .notification-box {
+            background: rgba(210, 142, 142, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
+    <!-- Notification -->
+    <div class="notification-overlay" id="notification">
+        <div class="notification-box">
+            Tap to Start the Magica Story about Magical Girl 🎵
+        </div>
+    </div>
+
     <!-- Background Music -->
-    <audio id="background-music" autoplay loop>
+    <audio id="background-music" loop muted>
         <source src="song-upon.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
     <div class="story story11 active">
         <img src="11.png" alt="">
     </div>
@@ -77,52 +111,52 @@
     <div class="story story999">
         <img src="999.png" alt="">
     </div>
-
     <div class="story story999">
         <img src="9999.png" alt="">
     </div>
-
     <div class="story story999">
         <img src="99999.png" alt="">
     </div>
 
     <script>
+        // Function to start the story and play music after user interaction
+        function startStory() {
+            // Play background music
+            const audio = document.getElementById("background-music");
+            audio.muted = false;
+            audio.play().catch(error => console.log("Autoplay blocked:", error));
 
-const backgroundImage = new Image();
-        backgroundImage.src = 'gif-back1.gif';
+            // Hide the notification
+            document.getElementById("notification").style.display = "none";
 
-        backgroundImage.onload = () => {
-            document.body.style.backgroundImage = `url(${backgroundImage.src})`; // Apply background once loaded
-        };
- 
-        const images = document.querySelectorAll('.story');
-        let currentIndex = 0;
+            // Preload background image
+            const backgroundImage = new Image();
+            backgroundImage.src = 'gif-back1.gif';
+            backgroundImage.onload = () => {
+                document.body.style.backgroundImage = `url(${backgroundImage.src})`;
+            };
 
-        function changeImage() {
-            // Hide the current image
-            images[currentIndex].classList.remove('active');
+            // Start image slideshow
+            const images = document.querySelectorAll('.story');
+            let currentIndex = 0;
 
-            // Move to the next image
-            currentIndex = (currentIndex + 1) % images.length;
+            function changeImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
 
-            // Show the next image
-            images[currentIndex].classList.add('active');
-
-            // If it's the last image, wait 10 seconds then redirect
-            if (currentIndex === images.length - 1) {
-                setTimeout(() => {
-                    window.location.href = 'arabian.html';
-                }, 8000); // 10 seconds delay
+                if (currentIndex === images.length - 1) {
+                    setTimeout(() => {
+                        window.location.href = 'arabian.html';
+                    }, 8000);
+                }
             }
+
+            setInterval(changeImage, 9000);
         }
 
-        // Change image every 9 seconds
-        setInterval(changeImage, 9000);
-
-           // Fix autoplay issues in some browsers
-           window.addEventListener('click', () => {
-            document.getElementById("background-music").play();
-        });
+        // Wait for user to click the notification before running the script
+        document.getElementById("notification").addEventListener("click", startStory);
     </script>
 
 </body>
