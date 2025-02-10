@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slide Show</title>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
 
-        /* In pink.html */
-body {
-    opacity: 0;
-    transition: opacity 1s ease-in;
-}
-
-body.loaded {
-    opacity: 1;
-}
+        body.loaded {
+            opacity: 1;
+        }
 
         body, html {
             margin: 0;
@@ -51,7 +49,7 @@ body.loaded {
         }
 
         /* Button styling */
-        .next-button {
+        .next-button, .start-button {
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -77,52 +75,49 @@ body.loaded {
             border-radius: 8px;
         }
 
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .next-button {
-                font-size: 16px;
-                padding: 10px 20px;
-            }
+        /* Full-screen overlay for pop-up */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
         }
 
-        .next-button-effect {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 18px;
-    /* background-color: rgba(255, 255, 255, 0.9); */
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    animation: buttonAnimation 1.5s infinite ease-in-out;
-}
+        .popup button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: pink;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
 
-/* Keyframes for size animation */
-@keyframes buttonAnimation {
-    0% {
-        transform: scale(1); /* Original size */
-        background-color: pink;
-
-    }
-    50% {
-        transform: scale(1.1); /* Slightly larger */
-        background-color: rgb(221, 93, 114);
-    }
-    100% {
-        transform: scale(1); /* Return to original size */
-        background-color: pink;
-    }
-}
     </style>
 </head>
 <body>
 
-    <audio id="background-music" autoplay loop>
+    <!-- Popup asking user to start -->
+    <div class="popup" id="popup">
+        <h2>Click to Start the Experience</h2>
+        <button class="start-button" onclick="startExperience()">Start</button>
+    </div>
+
+    <audio id="background-music" loop>
         <source src="kiss.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
     <div class="slide active" style="background-image: url('button-improved.gif');">
-        <button class="next-button next-button-effect">Next Slide</button>
+        <button class="next-button">Next Slide</button>
     </div>
     <div class="slide" style="background-image: url('sun.gif');">
         <button class="next-button">Next Slide</button>
@@ -135,11 +130,22 @@ body.loaded {
         <button class="next-button">Next Slide</button>
     </div>
     <div class="slide" style="background-image: url('everything.gif');">
-
         <button class="next-button last-next-button" onclick="window.location.href = 'jasmine-video.html';">Finish</button>
     </div>
 
     <script>
+        function startExperience() {
+            // Remove popup
+            document.getElementById("popup").style.display = "none";
+
+            // Play audio
+            const audio = document.getElementById("background-music");
+            audio.play().catch(error => console.log("Autoplay blocked:", error));
+
+            // Fade-in effect
+            document.body.classList.add('loaded');
+        }
+
         const slides = document.querySelectorAll('.slide');
         let currentIndex = 0;
 
@@ -147,46 +153,14 @@ body.loaded {
             button.addEventListener('click', () => {
                 if (index < slides.length - 1) {
                     slides[currentIndex].classList.remove('active');
-                    slides[currentIndex].classList.add('previous'); // Move old slide up
+                    slides[currentIndex].classList.add('previous');
 
                     currentIndex++;
-                    slides[currentIndex].classList.add('active'); // Move new slide into view
+                    slides[currentIndex].classList.add('active');
                 }
             });
         });
 
-        // When the pink.html page is loaded, apply the fade-in effect
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        document.body.classList.add('loaded');
-    }, 100);  // Delay to ensure the body has fully loaded
-});
-
-
-
-    window.addEventListener('click', () => {
-            document.getElementById("background-music").play();
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-        const audio = document.getElementById("background-music");
-
-        // Ensure audio is not muted
-        audio.muted = false;
-
-        // Play audio on any user interaction
-        function playAudio() {
-            audio.play().catch(error => console.log("Autoplay blocked:", error));
-            
-            // Remove event listener after first interaction
-            window.removeEventListener("click", playAudio);
-            window.removeEventListener("touchstart", playAudio);
-        }
-
-        // Listen for any user interaction (click or touch)
-        window.addEventListener("click", playAudio);
-        window.addEventListener("touchstart", playAudio);
-    });
     </script>
 
 </body>
