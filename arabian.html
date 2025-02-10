@@ -392,6 +392,10 @@
 
 
     <p class="telling-text">You mean everything to IVAN. You are his love, his Princess, and his life</p>
+    <audio id="Ivan-voice">
+        <source src="ivan3.mp3" type="audio/mp3">
+    </audio>
+
 
     <!-- Hidden image that will be shown after clicking the lamp -->
     <img id="hiddenImage" class="hidden-image" src="jiney.png">
@@ -594,6 +598,8 @@ function section3() {
 
     document.querySelector(".telling").style.display = "block";
     document.querySelector(".telling-text").style.display = "block";
+   
+    document.getElementById("Ivan-voice").play();
 
 
 
