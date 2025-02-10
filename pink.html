@@ -167,6 +167,26 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('click', () => {
             document.getElementById("background-music").play();
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("background-music");
+
+        // Ensure audio is not muted
+        audio.muted = false;
+
+        // Play audio on any user interaction
+        function playAudio() {
+            audio.play().catch(error => console.log("Autoplay blocked:", error));
+            
+            // Remove event listener after first interaction
+            window.removeEventListener("click", playAudio);
+            window.removeEventListener("touchstart", playAudio);
+        }
+
+        // Listen for any user interaction (click or touch)
+        window.addEventListener("click", playAudio);
+        window.addEventListener("touchstart", playAudio);
+    });
     </script>
 
 </body>
